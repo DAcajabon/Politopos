@@ -1,5 +1,6 @@
 <h1>{{ title }}</h1>
 <canvas #canvas></canvas>
 <br/>
-<br/>
-<input type="button" (click)="dibujar()" value="Dibujar">
+<input type="text" placeholder="Lados" [(ngModel)]="lados" >
+<input type="button" (click)="dibujar()" value="Dibujar" style="margin-left: 20px">
+<input type="button" (click)="limpiar()" value="Limpiar" style="margin-left: 20px">
