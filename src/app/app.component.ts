@@ -20,11 +20,11 @@ export class AppComponent implements AfterViewInit{
 
   ngAfterViewInit(): void {
     const canvasEl: HTMLCanvasElement = this.canvas.nativeElement;
-    canvasEl.setAttribute('width', '985px');
+    canvasEl.setAttribute('width', '750px');
     canvasEl.setAttribute('height', '480px');
     this.cx = canvasEl.getContext('2d');
     this.cx.lineWidth = 3;
-    this.cx.lineCap = 'butt';
+    this.cx.lineCap = 'round';
     this.cx.strokeStyle = '#000';
     this.centroX = canvasEl.width / 2;
     this.centroY = canvasEl.height / 2;
@@ -37,7 +37,5 @@ export class AppComponent implements AfterViewInit{
     this.cx.lineTo(this.centroX, this.centroY + 50);
     this.cx.stroke();
   }
-
-
 
 }
