@@ -1,4 +1,4 @@
-import { Component, Input, ElementRef, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, AfterViewInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -8,17 +8,17 @@ import { Component, Input, ElementRef, AfterViewInit, ViewChild } from '@angular
 export class AppComponent implements AfterViewInit{
 
   lados: number = null;
-  posiciones: number[];
+  posiciones: number[] = [];
   centroX: number;
   centroY: number;
   ancho: number;
   alto: number;
   title = 'Politopes';
+  radio: number = 230;
 
   @ViewChild('canvas') public canvas: ElementRef;
 
   private cx: CanvasRenderingContext2D;
-
 
   ngAfterViewInit(): void {
     const canvasEl: HTMLCanvasElement = this.canvas.nativeElement;
@@ -34,14 +34,19 @@ export class AppComponent implements AfterViewInit{
   }
 
   dibujar(){
-    this.cx.beginPath();
-    this.cx.moveTo(this.centroX, this.centroY);
-    this.cx.lineTo(this.centroX, this.centroY + 50);
-    this.cx.stroke();
-  }
+    let angulo = 360 / this.lados;
+    let nuevaX: number;
+    let nuevaY: number;
 
-  calcular(){
-    //https://en.wikipedia.org/wiki/List_of_regular_polytopes_and_compounds
+    let medida: number = 90 - angulo;
+
+    nuevaX = this.radio * Math.cos(medida);
+    nuevaY = this.radio * Math.sin(medida);
+
+    this.cx.beginPath();
+    this.cx.moveTo(this.centroX, this.centroY - 230);
+    this.cx.lineTo(this.centroX + nuevaX, this.centroY - nuevaY);
+    this.cx.stroke();
   }
 
   limpiar(){
@@ -51,7 +56,7 @@ export class AppComponent implements AfterViewInit{
 
   circulo(){
     this.cx.beginPath();
-    this.cx.arc(this.centroX, this.centroY, 230, 0, 2 * Math.PI);
+    this.cx.arc(this.centroX, this.centroY, this.radio, 0, 2 * Math.PI);
     this.cx.stroke();
     this.cx.closePath();
   }
