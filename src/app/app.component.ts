@@ -38,13 +38,48 @@ export class AppComponent implements AfterViewInit{
     this.circulo();
   }
 
-  dibujar(){
+  dibujarPol(){
+    this.posiciones = [];
+    this.calcular();
 
+    this.cx.beginPath();
+    this.cx.moveTo(this.centroX + this.posiciones[0].x, this.centroY + this.posiciones[0].y)
+    for (let i = 1; i < this.lados; i++){
+      this.cx.lineTo(this.centroX + this.posiciones[i].x, this.centroY + this.posiciones[i].y);
+      if (i == this.lados - 1){
+        this.cx.lineTo(this.centroX + this.posiciones[0].x, this.centroY + this.posiciones[0].y);
+      }
+    }
+    this.cx.stroke();
+
+
+  }
+
+  dibujarEst(){
+    this.posiciones = [];
+    this.calcular();
+
+    let cont: number = 0;
+    this.cx.beginPath();
+    this.cx.moveTo(this.centroX + this.posiciones[0].x, this.centroY + this.posiciones[0].y);
+    for (let a = 1; a < this.lados; a++){
+      cont += 2;
+      this.cx.lineTo(this.centroX + this.posiciones[cont].x, this.centroY + this.posiciones[cont].y);
+      if (cont == this.lados - 1){
+        cont = -1;
+      }
+      if (a == this.lados - 1){
+        this.cx.lineTo(this.centroX + this.posiciones[0].x, this.centroY + this.posiciones[0].y);
+      }
+    }
+    this.cx.stroke();
+  }
+
+  calcular(){
     let angulo: number = 360 / this.lados;
     let x: number;
     let y: number;
     let anguloRad: number;
-    alert(angulo)
     for (let i = 0; i < this.lados; i++) {
       anguloRad = (angulo * i) * Math.PI / 180;
       x = this.radio * Math.cos(anguloRad);
@@ -53,21 +88,8 @@ export class AppComponent implements AfterViewInit{
         x: x,
         y: y,
       });
-//      alert('x es: ' + x + ' y es: ' + y);
     }
-
-    this.cx.beginPath();
-    for (let i = 0; i < this.lados; i++){
-      this.cx.moveTo(this.centroX, this.centroY);
-      this.cx.lineTo(this.centroX + this.posiciones[i].x, this.centroY + this.posiciones[i].y);
-      this.cx.stroke();
-    }
-    this.cx.stroke();
-    this.posiciones = [];
-
   }
-
-  calcular(){  }
 
   limpiar(){
     this.cx.clearRect(0, 0, 600, 480);
