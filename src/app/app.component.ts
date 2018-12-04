@@ -56,23 +56,27 @@ export class AppComponent implements AfterViewInit{
   }
 
   dibujarEst(){
-    this.posiciones = [];
-    this.calcular();
-
-    let cont: number = 0;
-    this.cx.beginPath();
-    this.cx.moveTo(this.centroX + this.posiciones[0].x, this.centroY + this.posiciones[0].y);
-    for (let a = 1; a < this.lados; a++){
-      cont += 2;
-      this.cx.lineTo(this.centroX + this.posiciones[cont].x, this.centroY + this.posiciones[cont].y);
-      if (cont == this.lados - 1){
-        cont = -1;
+    if(this.lados % 2){
+      this.posiciones = [];
+      this.calcular();
+  
+      let cont: number = 0;
+      this.cx.beginPath();
+      this.cx.moveTo(this.centroX + this.posiciones[0].x, this.centroY + this.posiciones[0].y);
+      for (let a = 1; a < this.lados; a++){
+        cont += 2;
+        this.cx.lineTo(this.centroX + this.posiciones[cont].x, this.centroY + this.posiciones[cont].y);
+        if (cont == this.lados - 1){
+          cont = -1;
+        }
+        if (a == this.lados - 1){
+          this.cx.lineTo(this.centroX + this.posiciones[0].x, this.centroY + this.posiciones[0].y);
+        }
       }
-      if (a == this.lados - 1){
-        this.cx.lineTo(this.centroX + this.posiciones[0].x, this.centroY + this.posiciones[0].y);
-      }
+      this.cx.stroke();  
+    }else{
+      alert('Para la estrlla debe ser número impar');
     }
-    this.cx.stroke();
   }
 
   calcular(){
