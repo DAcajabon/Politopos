@@ -26,7 +26,7 @@ export class AppComponent implements AfterViewInit{
 
   ngAfterViewInit(): void {
     const canvasEl: HTMLCanvasElement = this.canvas.nativeElement;
-    canvasEl.setAttribute('width', '600px');      //Evita que se reviente la imagen
+    canvasEl.setAttribute('width', '480px');      //Evita que se reviente la imagen
     canvasEl.setAttribute('height', '480px');     //Evita que se reviente la imagen
     this.cx = canvasEl.getContext('2d');
     this.cx.lineWidth = 3;                        //Ancho de la linea de dibujo
@@ -103,7 +103,7 @@ export class AppComponent implements AfterViewInit{
   }
 
   limpiar(){
-    this.cx.clearRect(0, 0, 600, 480);
+    this.cx.clearRect(0, 0, 480, 480);
     this.circulo();
     this.lados = null;
     this.espacios = null;
