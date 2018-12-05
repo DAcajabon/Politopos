@@ -106,6 +106,7 @@ export class AppComponent implements AfterViewInit{
     this.cx.clearRect(0, 0, 600, 480);
     this.circulo();
     this.lados = null;
+    this.espacios = null;
     this.posiciones = [];
   }
 
